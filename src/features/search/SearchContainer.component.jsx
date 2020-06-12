@@ -19,11 +19,15 @@ const SearchContainer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(setSearchPhrase(username));
+    if (username !== searchPhrase) {
+      dispatch(setSearchPhrase(username));
 
-    dispatch(fetchUsers(username))
-      .then((res) => dispatch(setUsers(res.payload.items)))
-      .catch((err) => console.log(err));
+      dispatch(fetchUsers(username))
+        .then((res) =>
+          dispatch(setUsers(res.payload.items))
+        )
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

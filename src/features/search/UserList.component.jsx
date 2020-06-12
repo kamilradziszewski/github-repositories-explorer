@@ -11,7 +11,7 @@ const UserList = () => {
   let userList = null;
   if (users && users.length) {
     userList = users.map((user) => (
-      <UserBlock key={user.id} username={user.login} />
+      <UserBlock key={user.id} user={user} />
     ));
   }
 

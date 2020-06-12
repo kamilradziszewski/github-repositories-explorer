@@ -37,12 +37,10 @@ const RepoTile = ({
         </div>
 
         <div className={styles.userRepo__desc}>{desc}</div>
-        {numOfStars > 0 ? (
-          <div className={styles.userRepo__stars}>
-            <span>{numOfStars}</span>
-            <IconStar className={styles.iconStar} />
-          </div>
-        ) : null}
+        <div className={styles.userRepo__stars}>
+          <span>{numOfStars}</span>
+          <IconStar className={styles.iconStar} />
+        </div>
       </a>
     );
   }

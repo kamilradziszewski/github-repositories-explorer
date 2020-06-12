@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  fetchReposForUser,
+  setReposForUser,
+  selectUsers,
+} from "./searchSlice";
 
 import RepoTile from "./RepoTile.component";
 
@@ -6,11 +13,34 @@ import { ReactComponent as IconChevronDown } from "../../assets/icons/chevron-do
 
 import styles from "./UserBlock.module.scss";
 
-const UserBlock = ({ username }) => {
+const UserBlock = ({ user }) => {
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
+
   const [
     isUserBlockOpened,
     setIsUserBlockOpened,
   ] = useState(false);
+
+  const handleClick = () => {
+    setIsUserBlockOpened(!isUserBlockOpened);
+
+    if (
+      !users.find((curUser) => curUser.id === user.id).repos
+    ) {
+      dispatch(fetchReposForUser(user.repos_url))
+        .then((res) => {
+          dispatch(
+            setReposForUser({ user, repos: res.payload })
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const repoList = users.find(
+    (curUser) => curUser.id === user.id
+  ).repos;
 
   return (
     <div
@@ -20,33 +50,27 @@ const UserBlock = ({ username }) => {
     >
       <div
         className={styles.userHeader}
-        onClick={() =>
-          setIsUserBlockOpened(!isUserBlockOpened)
-        }
+        onClick={() => handleClick()}
       >
-        {username}
+        {user.login}
         <IconChevronDown className={styles.iconChevron} />
       </div>
       <div className="user-repos">
-        <RepoTile
-          title="Repository title"
-          desc="Repository description"
-          numOfStars="12"
-          url="https://google.com"
-        />
-        <RepoTile
-          title="Repository title"
-          desc="Repository description"
-          numOfStars="48"
-          url="https://google.com"
-        />
-        <RepoTile
-          title="Repository title"
-          desc="Repository description"
-          numOfStars="23"
-          url="https://google.com"
-        />
-        <RepoTile blank={true} />
+        {repoList && repoList.length > 0 ? (
+          repoList.map((repo) => {
+            return (
+              <RepoTile
+                key={repo.id}
+                title={repo.name}
+                desc={repo.description}
+                numOfStars={repo.stargazers_count}
+                url={repo.html_url}
+              />
+            );
+          })
+        ) : (
+          <RepoTile blank={true} />
+        )}
       </div>
     </div>
   );

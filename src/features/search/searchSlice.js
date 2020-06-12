@@ -14,6 +14,17 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const fetchReposForUser = createAsyncThunk(
+  "search/fetchReposForUserStatus",
+  async (userReposUrl) => {
+    const response = await fetch(
+      userReposUrl
+    ).then((response) => response.json());
+
+    return response;
+  }
+);
+
 export const searchSlice = createSlice({
   name: "search",
   initialState: {
@@ -27,12 +38,18 @@ export const searchSlice = createSlice({
     setUsers: (state, { payload }) => {
       state.users = payload;
     },
+    setReposForUser: (state, { payload }) => {
+      state.users.find(
+        (user) => user.id === payload.user.id
+      ).repos = payload.repos;
+    },
   },
 });
 
 export const {
-  setUsers,
   setSearchPhrase,
+  setUsers,
+  setReposForUser,
 } = searchSlice.actions;
 
 export const selectUsers = (state) => state.search.users;
