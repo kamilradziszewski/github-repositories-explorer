@@ -6,7 +6,7 @@ import { ReactComponent as IconChevronDown } from "../../assets/icons/chevron-do
 
 import styles from "./UserBlock.module.scss";
 
-const UserBlock = () => {
+const UserBlock = ({ username }) => {
   const [
     isUserBlockOpened,
     setIsUserBlockOpened,
@@ -24,7 +24,7 @@ const UserBlock = () => {
           setIsUserBlockOpened(!isUserBlockOpened)
         }
       >
-        Exampleuser1
+        {username}
         <IconChevronDown className={styles.iconChevron} />
       </div>
       <div className="user-repos">

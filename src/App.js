@@ -4,7 +4,7 @@ import "bulma";
 import "./App.scss";
 
 import SearchContainer from "./features/search/SearchContainer.component";
-import UserBlock from "./features/search/UserBlock.component";
+import UserList from "./features/search/UserList.component";
 
 function App() {
   return (
@@ -17,8 +17,7 @@ function App() {
         <div className="main-container">
           <SearchContainer />
 
-          <UserBlock />
-          <UserBlock />
+          <UserList />
         </div>
       </div>
     </div>
