@@ -31,6 +31,13 @@
 
   border-radius: $border-radius;
   background-color: $lightgrey;
+
+  transition: background-color $transition-time ease-in-out;
+
+  &:focus,
+  &:hover {
+    background-color: darken($lightgrey, 5);
+  }
 }
 
 .iconChevron {
