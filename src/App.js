@@ -3,10 +3,7 @@ import React from "react";
 import "bulma";
 import "./App.scss";
 
-import { ReactComponent as IconStar } from "./assets/icons/star.svg";
-import { ReactComponent as IconChevronDown } from "./assets/icons/chevron-down.svg";
-
-import RepoTile from "./features/search/RepoTile.component";
+import UserBlock from "./features/search/UserBlock.component";
 
 function App() {
   return (
@@ -37,41 +34,8 @@ function App() {
             </p>
           </div>
 
-          <div className="user">
-            <div className="user-header">
-              Exampleuser1
-              <IconChevronDown className="icon--chevron" />
-            </div>
-            <div className="user-repos">
-              <RepoTile
-                title="Repository title"
-                desc="Repository description"
-                numOfStars="12"
-                url="https://google.com"
-              />
-              <RepoTile
-                title="Repository title"
-                desc="Repository description"
-                numOfStars="48"
-                url="https://google.com"
-              />
-              <RepoTile
-                title="Repository title"
-                desc="Repository description"
-                numOfStars="23"
-                url="https://google.com"
-              />
-              <RepoTile blank={true} />
-            </div>
-          </div>
-
-          <div className="user">
-            <div className="user-header">
-              Exampleuser431
-              <IconChevronDown className="icon--chevron" />
-            </div>
-            <div className="user-repos"></div>
-          </div>
+          <UserBlock />
+          <UserBlock />
         </div>
       </div>
     </div>

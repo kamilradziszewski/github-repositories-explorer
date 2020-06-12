@@ -1,0 +1,47 @@
+@import "../../assets/scss/variables.scss";
+
+.userBlock {
+  overflow: hidden;
+
+  max-height: 3rem;
+
+  transition: max-height #{$transition-time * 3} cubic-bezier(0, 1, 0, 1);
+}
+
+.userBlockVisible {
+  max-height: 500rem;
+
+  transition: max-height #{$transition-time * 3} cubic-bezier(1, 0, 1, 0);
+
+  .iconChevron {
+    transform: rotate(-180deg);
+  }
+}
+
+.userHeader {
+  position: relative;
+
+  overflow: hidden;
+
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+
+  cursor: pointer;
+  text-overflow: ellipsis;
+
+  border-radius: $border-radius;
+  background-color: $lightgrey;
+}
+
+.iconChevron {
+  position: absolute;
+  top: calc(50% - 0.6rem);
+  right: 0.5rem;
+
+  width: 1.2rem;
+  height: 1.2rem;
+
+  transition: transform #{$transition-time * 3} linear;
+
+  stroke: $black;
+}

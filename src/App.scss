@@ -31,29 +31,3 @@ body {
 .input {
   background-color: $lightgrey;
 }
-
-.user-header {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-
-  border-radius: $border-radius;
-}
-
-.user-header {
-  position: relative;
-
-  cursor: pointer;
-
-  background-color: $lightgrey;
-}
-
-.icon--chevron {
-  position: absolute;
-  top: calc(50% - 0.6rem);
-  right: 0.5rem;
-
-  width: 1.2rem;
-  height: 1.2rem;
-
-  stroke: $black;
-}
