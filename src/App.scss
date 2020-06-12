@@ -1,0 +1,96 @@
+// colors
+$white: rgb(255, 255, 255);
+$lightgrey: rgb(242, 242, 242);
+$darkgrey: rgb(224, 224, 224);
+$black: rgb(74, 74, 74);
+
+// dimensions
+$border-radius: 4px;
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+
+  background-color: $lightgrey;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 25rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.search-box-container {
+  padding: 1rem;
+
+  border-radius: $border-radius;
+  background-color: white;
+}
+
+.input {
+  background-color: $lightgrey;
+}
+
+.user-header,
+.user-repo {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+
+  border-radius: $border-radius;
+}
+
+.user-header {
+  position: relative;
+
+  cursor: pointer;
+
+  background-color: $lightgrey;
+}
+
+.icon--chevron {
+  position: absolute;
+  top: calc(50% - 0.6rem);
+  right: 0.5rem;
+
+  width: 1.2rem;
+  height: 1.2rem;
+
+  stroke: $black;
+}
+
+.user-repo {
+  position: relative;
+
+  margin-left: 1rem;
+
+  background-color: $darkgrey;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__stars {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    font-weight: bold;
+  }
+}
+
+.icon--star {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.25rem;
+  padding-top: 0.2rem;
+
+  fill: $black;
+}
