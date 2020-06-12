@@ -6,6 +6,8 @@ import "./App.scss";
 import { ReactComponent as IconStar } from "./assets/icons/star.svg";
 import { ReactComponent as IconChevronDown } from "./assets/icons/chevron-down.svg";
 
+import RepoTile from "./features/search/RepoTile.component";
+
 function App() {
   return (
     <div className="App">
@@ -41,31 +43,24 @@ function App() {
               <IconChevronDown className="icon--chevron" />
             </div>
             <div className="user-repos">
-              <div className="user-repo">
-                <div className="user-repo__title">
-                  Repository title
-                </div>
-                <div className="user-repo__desc">
-                  Repository description
-                </div>
-                <div className="user-repo__stars">
-                  <span>12</span>
-                  <IconStar className="icon--star" />
-                </div>
-              </div>
-
-              <div className="user-repo">
-                <div className="user-repo__title">
-                  Repository title
-                </div>
-                <div className="user-repo__desc">
-                  Repository description
-                </div>
-                <div className="user-repo__stars">
-                  <span>148</span>
-                  <IconStar className="icon--star" />
-                </div>
-              </div>
+              <RepoTile
+                title="Repository title"
+                desc="Repository description"
+                numOfStars="12"
+                url="https://google.com"
+              />
+              <RepoTile
+                title="Repository title"
+                desc="Repository description"
+                numOfStars="48"
+                url="https://google.com"
+              />
+              <RepoTile
+                title="Repository title"
+                desc="Repository description"
+                numOfStars="23"
+                url="https://google.com"
+              />
             </div>
           </div>
 

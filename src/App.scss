@@ -1,11 +1,4 @@
-// colors
-$white: rgb(255, 255, 255);
-$lightgrey: rgb(242, 242, 242);
-$darkgrey: rgb(224, 224, 224);
-$black: rgb(74, 74, 74);
-
-// dimensions
-$border-radius: 4px;
+@import "./assets/scss/variables.scss";
 
 body {
   min-width: 100vw;
@@ -39,8 +32,7 @@ body {
   background-color: $lightgrey;
 }
 
-.user-header,
-.user-repo {
+.user-header {
   margin-bottom: 0.5rem;
   padding: 0.5rem;
 
@@ -64,33 +56,4 @@ body {
   height: 1.2rem;
 
   stroke: $black;
-}
-
-.user-repo {
-  position: relative;
-
-  margin-left: 1rem;
-
-  background-color: $darkgrey;
-
-  &__title {
-    font-weight: bold;
-  }
-
-  &__stars {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-
-    font-weight: bold;
-  }
-}
-
-.icon--star {
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-left: 0.25rem;
-  padding-top: 0.2rem;
-
-  fill: $black;
 }

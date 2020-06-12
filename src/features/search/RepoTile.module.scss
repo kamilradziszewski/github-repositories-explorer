@@ -1,0 +1,44 @@
+@import "../../assets/scss/variables.scss";
+
+.userRepo {
+  position: relative;
+
+  display: block;
+
+  margin-bottom: $basic-spacing;
+  margin-left: calc(2 * #{$basic-spacing});
+  padding: $basic-spacing;
+
+  transition: background-color $transition-time ease-in-out;
+
+  color: $black;
+  border-radius: $border-radius;
+  background-color: $darkgrey;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__stars {
+    position: absolute;
+    top: $basic-spacing;
+    right: $basic-spacing;
+
+    font-weight: bold;
+  }
+
+  &:focus,
+  &:hover {
+    color: $black;
+    background-color: darken($darkgrey, 5);
+  }
+}
+
+.iconStar {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.25rem;
+  padding-top: 0.2rem;
+
+  fill: $black;
+}
