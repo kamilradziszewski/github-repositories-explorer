@@ -61,6 +61,7 @@ function App() {
                 numOfStars="23"
                 url="https://google.com"
               />
+              <RepoTile blank={true} />
             </div>
           </div>
 
