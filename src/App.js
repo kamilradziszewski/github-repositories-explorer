@@ -5,6 +5,7 @@ import "./App.scss";
 
 import SearchContainer from "./features/search/SearchContainer.component";
 import UserList from "./features/search/UserList.component";
+import Modal from "./features/util/Modal.component";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <UserList />
         </div>
       </div>
+
+      <Modal />
     </div>
   );
 }

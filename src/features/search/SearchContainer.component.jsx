@@ -23,9 +23,9 @@ const SearchContainer = () => {
       dispatch(setSearchPhrase(username));
 
       dispatch(fetchUsers(username))
-        .then((res) =>
-          dispatch(setUsers(res.payload.items))
-        )
+        .then((res) => {
+          dispatch(setUsers(res.payload.items));
+        })
         .catch((err) => console.log(err));
     }
   };

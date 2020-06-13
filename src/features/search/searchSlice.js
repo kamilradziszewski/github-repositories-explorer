@@ -30,6 +30,7 @@ export const searchSlice = createSlice({
   initialState: {
     users: [],
     searchPhrase: "",
+    isModalOpened: false,
   },
   reducers: {
     setSearchPhrase: (state, { payload }) => {
@@ -44,6 +45,20 @@ export const searchSlice = createSlice({
       ).repos = payload.repos;
     },
   },
+  extraReducers: {
+    [fetchUsers.pending]: (state, action) => {
+      state.isModalOpened = true;
+    },
+    [fetchUsers.fulfilled]: (state, action) => {
+      state.isModalOpened = false;
+    },
+    [fetchReposForUser.pending]: (state, action) => {
+      state.isModalOpened = true;
+    },
+    [fetchReposForUser.fulfilled]: (state, action) => {
+      state.isModalOpened = false;
+    },
+  },
 });
 
 export const {
@@ -56,5 +71,8 @@ export const selectUsers = (state) => state.search.users;
 
 export const selectSearchPhrase = (state) =>
   state.search.searchPhrase;
+
+export const selectIsModalOpened = (state) =>
+  state.search.isModalOpened;
 
 export default searchSlice.reducer;

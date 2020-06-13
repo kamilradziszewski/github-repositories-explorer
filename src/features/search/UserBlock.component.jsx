@@ -23,8 +23,6 @@ const UserBlock = ({ user }) => {
   ] = useState(false);
 
   const handleClick = () => {
-    setIsUserBlockOpened(!isUserBlockOpened);
-
     if (
       !users.find((curUser) => curUser.id === user.id).repos
     ) {
@@ -33,8 +31,11 @@ const UserBlock = ({ user }) => {
           dispatch(
             setReposForUser({ user, repos: res.payload })
           );
+          setIsUserBlockOpened(!isUserBlockOpened);
         })
         .catch((err) => console.log(err));
+    } else {
+      setIsUserBlockOpened(!isUserBlockOpened);
     }
   };
 
