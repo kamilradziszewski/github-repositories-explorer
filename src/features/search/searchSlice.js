@@ -31,6 +31,7 @@ export const searchSlice = createSlice({
     users: null,
     searchPhrase: "",
     isModalOpened: false,
+    isLoading: false,
   },
   reducers: {
     setSearchPhrase: (state, { payload }) => {
@@ -48,15 +49,19 @@ export const searchSlice = createSlice({
   extraReducers: {
     [fetchUsers.pending]: (state, action) => {
       state.isModalOpened = true;
+      state.isLoading = true;
     },
     [fetchUsers.fulfilled]: (state, action) => {
       state.isModalOpened = false;
+      state.isLoading = false;
     },
     [fetchReposForUser.pending]: (state, action) => {
       state.isModalOpened = true;
+      state.isLoading = true;
     },
     [fetchReposForUser.fulfilled]: (state, action) => {
       state.isModalOpened = false;
+      state.isLoading = false;
     },
   },
 });
@@ -74,5 +79,8 @@ export const selectSearchPhrase = (state) =>
 
 export const selectIsModalOpened = (state) =>
   state.search.isModalOpened;
+
+export const selectIsLoading = (state) =>
+  state.search.isLoading;
 
 export default searchSlice.reducer;
