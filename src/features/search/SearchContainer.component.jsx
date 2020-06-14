@@ -68,6 +68,7 @@ const SearchContainer = () => {
             placeholder="Enter username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            aria-label="Username"
           />
         </div>
 
