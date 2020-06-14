@@ -110,3 +110,10 @@ body {
     opacity: 0;
   }
 }
+
+// Error Message
+.message {
+  min-width: 15rem;
+  min-height: 10rem;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.2);
+}

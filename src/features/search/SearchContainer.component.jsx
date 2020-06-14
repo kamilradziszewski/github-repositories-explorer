@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import {
   fetchUsers,
   setSearchPhrase,
   setUsers,
+  setErrorMessage,
   selectSearchPhrase,
   selectUsers,
 } from "./searchSlice";
@@ -23,13 +25,19 @@ const SearchContainer = () => {
     e.preventDefault();
 
     if (username !== searchPhrase) {
-      dispatch(setSearchPhrase(username));
-
       dispatch(fetchUsers(username))
-        .then((res) => {
-          dispatch(setUsers(res.payload.items));
+        .then(unwrapResult)
+        .then((originalPromiseResult) => {
+          dispatch(setSearchPhrase(username));
+          setUsername("");
+          dispatch(setUsers(originalPromiseResult.items));
         })
-        .catch((err) => console.log(err));
+        .catch((serializedError) => {
+          setUsername("");
+          dispatch(
+            setErrorMessage(serializedError.message)
+          );
+        });
     }
   };
 

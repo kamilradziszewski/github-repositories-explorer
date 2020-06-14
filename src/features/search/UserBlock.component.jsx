@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import {
   fetchReposForUser,
   setReposForUser,
+  setErrorMessage,
   selectUsers,
 } from "./searchSlice";
 
@@ -27,13 +29,21 @@ const UserBlock = ({ user }) => {
       !users.find((curUser) => curUser.id === user.id).repos
     ) {
       dispatch(fetchReposForUser(user.repos_url))
-        .then((res) => {
+        .then(unwrapResult)
+        .then((originalPromiseResult) => {
           dispatch(
-            setReposForUser({ user, repos: res.payload })
+            setReposForUser({
+              user,
+              repos: originalPromiseResult,
+            })
           );
           setIsUserBlockOpened(!isUserBlockOpened);
         })
-        .catch((err) => console.log(err));
+        .catch((serializedError) => {
+          dispatch(
+            setErrorMessage(serializedError.message)
+          );
+        });
     } else {
       setIsUserBlockOpened(!isUserBlockOpened);
     }
