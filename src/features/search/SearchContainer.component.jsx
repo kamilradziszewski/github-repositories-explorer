@@ -6,6 +6,7 @@ import {
   setSearchPhrase,
   setUsers,
   selectSearchPhrase,
+  selectUsers,
 } from "./searchSlice";
 
 import styles from "./SearchContainer.module.scss";
@@ -14,6 +15,8 @@ const SearchContainer = () => {
   const [username, setUsername] = useState("");
 
   const searchPhrase = useSelector(selectSearchPhrase);
+  const users = useSelector(selectUsers);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -29,6 +32,20 @@ const SearchContainer = () => {
         .catch((err) => console.log(err));
     }
   };
+
+  let searchResultInfo = null;
+  if (users) {
+    const searchResultInfoText =
+      users.length === 0
+        ? `No users found for "${searchPhrase}"`
+        : `Showing users for "${searchPhrase}"`;
+
+    searchResultInfo = (
+      <p className={`is-size-7 ${styles.searchPhrase}`}>
+        {searchResultInfoText}
+      </p>
+    );
+  }
 
   return (
     <>
@@ -56,11 +73,7 @@ const SearchContainer = () => {
         </div>
       </form>
 
-      {searchPhrase ? (
-        <p className={`is-size-7 ${styles.searchPhrase}`}>
-          Showing users for "{searchPhrase}"
-        </p>
-      ) : null}
+      {searchResultInfo}
     </>
   );
 };

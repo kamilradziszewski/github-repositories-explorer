@@ -28,7 +28,7 @@ export const fetchReposForUser = createAsyncThunk(
 export const searchSlice = createSlice({
   name: "search",
   initialState: {
-    users: [],
+    users: null,
     searchPhrase: "",
     isModalOpened: false,
   },
