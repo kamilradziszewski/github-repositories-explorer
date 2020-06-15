@@ -1,4 +1,14 @@
+@import "../../assets/scss/variables.scss";
+
 .searchPhrase {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.formikErrors {
+  padding-top: $basic-spacing;
+
+  color: darkred;
+
+  font-size: 0.7em;
 }

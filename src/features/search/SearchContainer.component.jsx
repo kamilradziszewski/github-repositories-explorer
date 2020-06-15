@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 import {
   fetchUsers,
@@ -14,32 +16,10 @@ import {
 import styles from "./SearchContainer.module.scss";
 
 const SearchContainer = () => {
-  const [username, setUsername] = useState("");
-
   const searchPhrase = useSelector(selectSearchPhrase);
   const users = useSelector(selectUsers);
 
   const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (username !== searchPhrase) {
-      dispatch(fetchUsers(username))
-        .then(unwrapResult)
-        .then((originalPromiseResult) => {
-          dispatch(setSearchPhrase(username));
-          setUsername("");
-          dispatch(setUsers(originalPromiseResult.items));
-        })
-        .catch((serializedError) => {
-          setUsername("");
-          dispatch(
-            setErrorMessage(serializedError.message)
-          );
-        });
-    }
-  };
 
   let searchResultInfo = null;
   if (users) {
@@ -57,30 +37,67 @@ const SearchContainer = () => {
 
   return (
     <>
-      <form
-        className={styles.searchForm}
-        onSubmit={(e) => handleSubmit(e)}
+      <Formik
+        initialValues={{ username: "" }}
+        validationSchema={Yup.object({
+          username: Yup.string()
+            .matches(
+              /^[a-zA-Z\d](?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))*$/,
+              "Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen."
+            )
+            .max(
+              39,
+              "Username is too long (maximum is 39 characters)."
+            ),
+        })}
+        onSubmit={(values, { resetForm }) => {
+          if (values.username !== searchPhrase) {
+            dispatch(fetchUsers(values.username))
+              .then(unwrapResult)
+              .then((originalPromiseResult) => {
+                dispatch(setSearchPhrase(values.username));
+                resetForm({});
+                dispatch(
+                  setUsers(originalPromiseResult.items)
+                );
+              })
+              .catch((serializedError) => {
+                resetForm({});
+                dispatch(
+                  setErrorMessage(serializedError.message)
+                );
+              });
+          }
+        }}
       >
-        <div className="field">
-          <input
-            className="input"
-            type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            aria-label="Username"
-          />
-        </div>
-
-        <div className="field">
-          <button
-            className="button is-fullwidth is-info"
-            disabled={!username}
-          >
-            Search
-          </button>
-        </div>
-      </form>
+        {({ errors, touched, values }) => (
+          <Form>
+            <div className="field">
+              <Field
+                name="username"
+                type="text"
+                className="input"
+                placeholder="Enter username"
+                aria-label="Username"
+              />
+              {touched.username && errors.username ? (
+                <div className={styles.formikErrors}>
+                  {errors.username}
+                </div>
+              ) : null}
+            </div>
+            <div className="field">
+              <button
+                className="button is-fullwidth is-info"
+                type="submit"
+                disabled={!values.username}
+              >
+                Search
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
 
       {searchResultInfo}
     </>
