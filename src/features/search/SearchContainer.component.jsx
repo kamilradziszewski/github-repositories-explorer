@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { Formik, Form, Field } from "formik";
@@ -16,6 +16,8 @@ import {
 import styles from "./SearchContainer.module.scss";
 
 const SearchContainer = () => {
+  const usernameInput = useRef(null);
+
   const searchPhrase = useSelector(selectSearchPhrase);
   const users = useSelector(selectUsers);
 
@@ -34,6 +36,10 @@ const SearchContainer = () => {
       </p>
     );
   }
+
+  useEffect(() => {
+    usernameInput.current.focus();
+  }, []);
 
   return (
     <>
@@ -79,6 +85,7 @@ const SearchContainer = () => {
                 className="input"
                 placeholder="Enter username"
                 aria-label="Username"
+                innerRef={usernameInput}
               />
               {touched.username && errors.username ? (
                 <div className={styles.formikErrors}>
