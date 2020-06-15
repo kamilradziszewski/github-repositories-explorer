@@ -16,7 +16,11 @@
   background-color: $darkgrey;
 
   &__title {
+    padding-right: 4.5rem;
+
     font-weight: bold;
+
+    overflow-wrap: break-word;
   }
 
   &__stars {
